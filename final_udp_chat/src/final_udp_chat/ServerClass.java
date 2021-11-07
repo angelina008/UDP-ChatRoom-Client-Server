@@ -73,7 +73,6 @@ public class ServerClass implements Runnable{
 
                     
                     int toPort = clients.get(nameOfReciever);
-                   // socket = new DatagramSocket(toPort);
                     
                     	byte[] data = (toSendMessage).getBytes();
                     	packet = new DatagramPacket(data, data.length, clientAddress, toPort);
