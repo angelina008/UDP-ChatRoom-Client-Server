@@ -54,13 +54,13 @@ public class ServerClass implements Runnable{
 				}
 
 				if(messageParts[0].matches("list")) {					
-                    Set<String> clientList = clients.keySet();
-                    String response = "";
-                    for (String clientOne : clientList) {
-                        response = response + clientOne + ",";
-                    }
+                    			Set<String> clientList = clients.keySet();
+                   			 String response = "";
+                   			 for (String clientOne : clientList) {
+                       				 response = response + clientOne + ",";
+                   			 }
                     
-                    byte[] data = (response).getBytes();
+                   			byte[] data = (response).getBytes();
 					packet = new DatagramPacket(data, data.length, clientAddress, client_port);
 					socket.send(packet);
 				}
@@ -69,28 +69,27 @@ public class ServerClass implements Runnable{
 					if(clients.containsKey(messageParts[1])) {
 					String nameOfReciever = messageParts[1];
 					String nameOfSender = messageParts[2];
-                    String toSendMessage = nameOfSender + ":" + messageParts[3];
+                    			String toSendMessage = nameOfSender + ":" + messageParts[3];
 
+                    			int toPort = clients.get(nameOfReciever);
                     
-                    int toPort = clients.get(nameOfReciever);
-                    
-                    	byte[] data = (toSendMessage).getBytes();
-                    	packet = new DatagramPacket(data, data.length, clientAddress, toPort);
+                    			byte[] data = (toSendMessage).getBytes();
+                    			packet = new DatagramPacket(data, data.length, clientAddress, toPort);
     					socket.send(packet);
     					byte[] data2 = ("Your message is sent").getBytes();
     					packet = new DatagramPacket(data2, data2.length, clientAddress, client_port);
     					socket.send(packet);
-                    } else {
-                        byte[] data = ("Client does not exist").getBytes();
+                    		} else {
+                       			byte[] data = ("Client does not exist").getBytes();
     					packet = new DatagramPacket(data, data.length, clientAddress, client_port);
     					socket.send(packet);
-                    }
+                    	}
 					
 				}
 				if(messageParts[0].matches("public")) {
 					String nameOfSender = messageParts[1];
-                    String toSendMessage = nameOfSender + ":" + messageParts[2];
-                    System.out.println(toSendMessage);
+                    			String toSendMessage = nameOfSender + ":" + messageParts[2];
+                   			System.out.println(toSendMessage);
 					byte[] data2 = ("Your message is sent").getBytes();
 					packet = new DatagramPacket(data2, data2.length, clientAddress, client_port);
 					socket.send(packet);
